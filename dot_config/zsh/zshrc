@@ -1,0 +1,58 @@
+export LC_ALL=en_US.UTF-8
+
+fpath+=($ZDOTDIR/completion)
+# source $ZDOTDIR/zplug.zsh
+source $ZDOTDIR/zinit
+
+# CDR settings
+if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]]; then
+    autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+    add-zsh-hook chpwd chpwd_recent_dirs
+    zstyle ':completion:*' recent-dirs-insert both
+    zstyle ':chpwd:*' recent-dirs-default true
+    zstyle ':chpwd:*' recent-dirs-max 1000
+    zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/chpwd-recent-dirs"
+fi
+
+# completion
+autoload -Uz compinit && compinit
+zstyle ':completion:*' completer _complete _correct
+zstyle ':completion:*' menu select interactive
+zstyle ':completion:*:rm:*' menu false
+zstyle ':completion:*:default' list-colors
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# History
+export HISTSIZE=1000
+export SAVEHIST=100000
+export HISTFILE=$ZDOTDIR/.zsh_history
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
+setopt correct
+
+# Theme 
+## git ps1
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUPSTREAM=auto
+setopt PROMPT_SUBST
+PS1='[%B%F{cyan}%n%f%b@%m %B%F{green}%~%f%b %F{red}$(__git_ps1 "(%s)")%f]
+\$ '
+
+# Alias
+alias vim='nvim'
+alias ghub='(){ hub browse $(ghq list | peco --query "$*" | cut -d "/" -f2,3) }'
+alias gi='(){ cd $(ghq root)/$(ghq list | peco --query "$*") }'
+
+if [ "$(uname)" = 'Darwin' ]; then
+    export LSCOLORS=Gxfxcxdxbxegedabagacad
+    alias ls='ls -G'
+else
+    eval $(dircolors ~/.colorrc)
+    alias ls='ls --color=auto'
+fi
+
+source $ZDOTDIR/functions
+source $ZDOTDIR/profile
