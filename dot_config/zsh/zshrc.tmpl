@@ -68,5 +68,13 @@ alias ls='ls --color=auto'
 
 {{ end }}
 
+{{ if eq .chezmoi.os "darwin" }}
+
+eval $(/opt/homebrew/bin/brew shellenv)
+
+{{ end }}
+
+eval "$(mise activate zsh)"
+
 source $ZDOTDIR/functions
 source $ZDOTDIR/profile
