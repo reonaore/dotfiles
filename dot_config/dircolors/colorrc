@@ -1,0 +1,15 @@
+
+DIR 1;36        # Gx → bold cyan
+LINK 35         # fx → magenta
+SOCK 32         # cx → green
+FIFO 33         # dx → yellow
+EXEC 31         # bx → red
+
+BLK 36          # eg → cyan
+CHR 34          # ed → blue
+
+SETUID 30;41    # ab → black on red
+SETGID 30;46    # ag → black on cyan
+
+STICKY_OTHER_WRITABLE 30;42  # ac → black on green
+OTHER_WRITABLE 30;44         # ad → black on blue

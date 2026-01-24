@@ -65,7 +65,7 @@ alias ls='ls -G'
 
 {{ else if eq .chezmoi.os "linux"}}
 
-eval $(dircolors ~/.colorrc)
+eval $(dircolors $XDG_CONFIG_HOME/dircolors/colorrc)
 alias ls='ls --color=auto'
 
 {{ end }}

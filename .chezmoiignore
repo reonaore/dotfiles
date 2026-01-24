@@ -1,3 +1,7 @@
 README.md
 .github
 */.vscode
+
+{{- if ne .chezmoi.os "linux" }}
+dot_config/dircolors/colorrc
+{{- end }}
