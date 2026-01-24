@@ -1,4 +1,5 @@
 export LC_ALL=en_US.UTF-8
+export ZDOTDIR="$HOME/.config/zsh"
 
 fpath+=($ZDOTDIR/completion)
 # source $ZDOTDIR/zplug.zsh
@@ -31,7 +32,7 @@ setopt hist_ignore_space
 setopt hist_reduce_blanks
 setopt correct
 
-# Theme 
+# Theme
 ## git ps1
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -46,13 +47,17 @@ alias vim='nvim'
 alias ghub='(){ hub browse $(ghq list | peco --query "$*" | cut -d "/" -f2,3) }'
 alias gi='(){ cd $(ghq root)/$(ghq list | peco --query "$*") }'
 
-if [ "$(uname)" = 'Darwin' ]; then
-    export LSCOLORS=Gxfxcxdxbxegedabagacad
-    alias ls='ls -G'
-else
-    eval $(dircolors ~/.colorrc)
-    alias ls='ls --color=auto'
-fi
+{{ if eq .chezmoi.os "darwin" }}
+
+export LSCOLORS=Gxfxcxdxbxegedabagacad
+alias ls='ls -G'
+
+{{ if eq .chezmoi.os "linux"}}
+
+eval $(dircolors ~/.colorrc)
+alias ls='ls --color=auto'
+
+{{ end }}
 
 source $ZDOTDIR/functions
 source $ZDOTDIR/profile
