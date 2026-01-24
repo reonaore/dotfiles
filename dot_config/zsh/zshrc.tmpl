@@ -52,7 +52,7 @@ alias gi='(){ cd $(ghq root)/$(ghq list | peco --query "$*") }'
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 alias ls='ls -G'
 
-{{ if eq .chezmoi.os "linux"}}
+{{ else if eq .chezmoi.os "linux"}}
 
 eval $(dircolors ~/.colorrc)
 alias ls='ls --color=auto'
