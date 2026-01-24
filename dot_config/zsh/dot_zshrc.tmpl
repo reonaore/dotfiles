@@ -6,11 +6,13 @@ export XDG_STATE_HOME="$HOME/.local/state"
 
 {{ if eq .chezmoi.os "darwin" }}
 export XDG_RUNTIME_DIR="$TMPDIR"
+{{ else if eq .chezmoi.os "linux" }}
+export EDITOR="nvim"
 {{ end }}
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-fpath+=($ZDOTDIR/completion)
+fpath+=($ZDOTDIR/completions)
 # source $ZDOTDIR/zplug.zsh
 source $ZDOTDIR/zinit
 
@@ -71,10 +73,11 @@ alias ls='ls --color=auto'
 {{ if eq .chezmoi.os "darwin" }}
 
 eval $(/opt/homebrew/bin/brew shellenv)
+source $XDG_DATA_HOME/iterm2/shell_integration.zsh
 
 {{ end }}
 
-eval "$(mise activate zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
 
 source $ZDOTDIR/functions
 source $ZDOTDIR/profile
