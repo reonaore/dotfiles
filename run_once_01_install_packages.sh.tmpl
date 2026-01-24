@@ -56,6 +56,7 @@ fi
 # if mise is not installed, install it
 if ! command -v mise &> /dev/null; then
     curl https://mise.run | sh
+    touch ~/.config/mise/config.local.toml
 fi
 
 # if zsh is not the default shell, remind user to change it

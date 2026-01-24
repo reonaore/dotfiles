@@ -8,6 +8,11 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_RUNTIME_DIR="$TMPDIR"
 {{ else if eq .chezmoi.os "linux" }}
 export EDITOR="nvim"
+# if snap is available
+if ! command -v snap &> /dev/null; then
+    export PATH="/snap/bin:$PATH"
+fi
+
 {{ end }}
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
