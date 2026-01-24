@@ -1,0 +1,31 @@
+name: Apply dotfiles
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  apply:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        system: [client, server]
+        exclude:
+          - os: macos-latest
+            system: server
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Install chezmoi
+        run: |
+          # if curl is available
+          if command -v curl >/dev/null 2>&1; then
+            sh -c "$(curl -qO- get.chezmoi.io)" -- init --apply reonaore
+          # if wget is available
+          elif command -v wget >/dev/null 2>&1; then
+            sh -c "$(wget -qO- get.chezmoi.io)" -- init --apply reonaore
+          else
+            echo "Error: Neither curl nor wget is available to install chezmoi."
