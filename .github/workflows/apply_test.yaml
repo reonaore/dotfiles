@@ -23,7 +23,7 @@ jobs:
         run: |
           # if curl is available
           if command -v curl >/dev/null 2>&1; then
-            sh -c "$(curl -qO- get.chezmoi.io)" -- init --apply reonaore
+            sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply reonaore
           # if wget is available
           elif command -v wget >/dev/null 2>&1; then
             sh -c "$(wget -qO- get.chezmoi.io)" -- init --apply reonaore
