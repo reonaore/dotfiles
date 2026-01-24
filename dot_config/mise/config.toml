@@ -1,0 +1,15 @@
+[tools]
+gh = "latest"
+java = "corretto-20.0.2.10.1"
+node = "latest"
+peco = "latest"
+python = "3.11"
+usage = "latest"
+uv = "latest"
+yq = "latest"
+ghq = "latest"
+
+[settings]
+python.uv_venv_auto = true
+experimental = true
+
