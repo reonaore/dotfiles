@@ -23,11 +23,12 @@ if [ ! -d "/Applications/iTerm.app" ]; then
 fi
 {{ end }}
 
-COMMAND_LIST=(vim nvim wget curl shellcheck coreutils git tmux)
+COMMAND_LIST=(vim nvim wget curl shellcheck coreutils git tmux fzf lazygit lazydocker)
 
 {{ if eq .chezmoi.os "darwin" }}
 
 brew install "${COMMAND_LIST[@]}"
+brew install --cask font-jetbrains-mono-nerd-font
 
 {{ else if eq .chezmoi.os "linux" }}
 

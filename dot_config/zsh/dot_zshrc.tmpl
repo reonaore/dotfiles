@@ -60,8 +60,8 @@ PS1='[%B%F{cyan}%n%f%b@%m %B%F{green}%~%f%b %F{red}$(__git_ps1 "(%s)")%f]
 
 # Alias
 alias vim='nvim'
-alias ghub='(){ hub browse $(ghq list | peco --query "$*" | cut -d "/" -f2,3) }'
-alias gi='(){ cd $(ghq root)/$(ghq list | peco --query "$*") }'
+alias ghub='(){ hub browse $(ghq list | fzf --reverse | cut -d "/" -f2,3) }'
+alias gi='(){ cd $(ghq root)/$(ghq list | fzf --reverse) }'
 
 {{ if eq .chezmoi.os "darwin" }}
 
