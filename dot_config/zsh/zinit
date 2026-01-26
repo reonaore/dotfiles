@@ -30,6 +30,7 @@ zinit light "zsh-users/zsh-completions"
 # zinit light "zsh-users/zaw"
 zinit snippet "https://raw.githubusercontent.com/git/git/refs/heads/master/contrib/completion/git-prompt.sh"
 zinit snippet OMZP::common-aliases
+zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
 zinit ice wait; zinit snippet OMZP::tmux
 

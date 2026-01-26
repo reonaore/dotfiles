@@ -20,3 +20,17 @@ function fzf-history-selection() {
 zle -N fzf-history-selection
 bindkey '^R' fzf-history-selection
 
+function rgfzf {
+  local search=""
+  if [[ $# -gt 0 ]]; then
+    search="$1"
+    shift
+  fi
+  command rg --color=always --line-number --no-heading --smart-case "$@" "$search" \
+  | command fzf -d':' --ansi \
+    --preview "command bat -p --color=always {1} --highlight-line {2}" \
+    --preview-window ~8,+{2}-5 \
+    --reverse \
+  | awk -F':' '{print $1}'
+}
+
