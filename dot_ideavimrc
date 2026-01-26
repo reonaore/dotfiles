@@ -244,7 +244,7 @@ nmap \\ti <Action>($InclusiveTranslateAction)
 nmap \\te <Action>($ExclusiveTranslateAction)
 
 " string manipulate (required idea plugin: String Manipulation)
-nmap <leader>ss <Action>(osmedile.intellij.stringmanip.PopupChoiceAction)
+nmap <leader>ss <Action>(Switcher)
 
 " code screenshot (required idea plugin: Code Screenshots)
 nmap <leader>cs <Action>(one.util.ideaplugin.screenshoter.CopyImageAction)

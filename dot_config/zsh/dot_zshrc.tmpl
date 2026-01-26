@@ -62,6 +62,8 @@ PS1='[%B%F{cyan}%n%f%b@%m %B%F{green}%~%f%b %F{red}$(__git_ps1 "(%s)")%f]
 alias vim='nvim'
 alias ghub='(){ hub browse $(ghq list | fzf --reverse | cut -d "/" -f2,3) }'
 alias gi='(){ cd $(ghq root)/$(ghq list | fzf --reverse) }'
+alias gsw='(){gb | fzf --reverse | cut -b 3- | xargs git switch}'
+alias pr='(){ gh pr list | fzf --reverse | cut -f 1 | xargs gh browse}'
 
 {{ if eq .chezmoi.os "darwin" }}
 
@@ -74,6 +76,8 @@ eval $(dircolors $XDG_CONFIG_HOME/dircolors/colorrc)
 alias ls='ls --color=auto'
 
 {{ end }}
+
+alias ff='rgfzf'
 
 {{ if eq .chezmoi.os "darwin" }}
 
