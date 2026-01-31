@@ -28,7 +28,7 @@ sudo apt-get update && \
     sudo apt install -y build-essential procps curl file git unzip
 if ! command -v brew &> /dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+    test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 {{ end }}
@@ -72,3 +72,4 @@ fi
 if [ "$SHELL" != "$(which zsh)" ]; then
     echo 'run chsh -s "$(which zsh)" to change your default shell to zsh after applying dotfiles.'
 fi
+

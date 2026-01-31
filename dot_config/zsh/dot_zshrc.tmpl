@@ -86,7 +86,7 @@ source $XDG_DATA_HOME/iterm2/shell_integration.zsh
 
 {{ else if eq .chezmoi.os "linux" }}
 
-test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 {{ end }}
 
