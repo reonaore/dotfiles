@@ -84,6 +84,10 @@ alias ff='rgfzf'
 eval $(/opt/homebrew/bin/brew shellenv)
 source $XDG_DATA_HOME/iterm2/shell_integration.zsh
 
+{{ else if eq .chezmoi.os "linux" }}
+
+test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+
 {{ end }}
 
 eval "$(~/.local/bin/mise activate zsh)"
