@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 {{ if eq .chezmoi.os "darwin" }}
 
@@ -25,22 +25,17 @@ fi
 
 # install brew if not installed
 sudo apt-get update && \
-    sudo apt install -y build-essential procps curl file git unzip
+    sudo apt install -y build-essential procps curl file git unzip zsh
 if ! command -v brew &> /dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+    eval "$(brew shellenv)"
 fi
 
 {{ end }}
 
 
 COMMAND_LIST=(vim nvim wget curl shellcheck coreutils git tmux fzf lazygit lazydocker)
-
-{{ if eq .chezmoi.os "linux" }}
-
-COMMAND_LIST+=("zsh")
-
-{{ end }}
 
 brew install "${COMMAND_LIST[@]}"
 brew install --cask font-jetbrains-mono-nerd-font
