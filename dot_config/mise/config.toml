@@ -8,6 +8,10 @@ usage = "latest"
 uv = "latest"
 yq = "latest"
 ghq = "latest"
+rg = "latest"
+fzf = "latest"
+chezmoi = "latest"
+"npm:cspell" = "latest"
 
 [settings]
 experimental = true

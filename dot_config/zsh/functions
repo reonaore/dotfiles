@@ -12,7 +12,7 @@ zle -N fzf-cdr
 bindkey '^U' fzf-cdr
 
 function fzf-history-selection() {
-  BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | fzf --reverse`
+  BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | fzf --reverse --query "$LBUFFER"`
   CURSOR=$#BUFFER
   zle reset-prompt
 }
@@ -20,17 +20,38 @@ function fzf-history-selection() {
 zle -N fzf-history-selection
 bindkey '^R' fzf-history-selection
 
-function rgfzf {
-  local search=""
-  if [[ $# -gt 0 ]]; then
-    search="$1"
-    shift
-  fi
-  command rg --color=always --line-number --no-heading --smart-case "$@" "$search" \
-  | command fzf -d':' --ansi \
-    --preview "command bat -p --color=always {1} --highlight-line {2}" \
-    --preview-window ~8,+{2}-5 \
-    --reverse \
-  | awk -F':' '{print $1}'
+function find_in_files {
+    local rg_prefix="rg --column --line-number --no-heading --color=always --smart-case "
+    local initial_query="${*:-}"
+    fzf --ansi --disabled --query "$initial_query" \
+        --bind "start:reload:$rg_prefix {q}" \
+        --bind "change:reload:sleep 0.1; $rg_prefix {q} || true" \
+        --delimiter : \
+        --preview 'bat --color=always {1} --highlight-line {2}' \
+        --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+        | awk -F':' '{print $1}'
 }
+
+function find_file_by_name {
+  local query
+  query="$1"
+
+  local rg_cmd
+  rg_cmd="rg --column --line-number --no-heading --color=always --smart-case"
+
+  fzf --ansi \
+      --delimiter ':' \
+      --preview 'bat --style=numbers --color=always {1} --highlight-line {2}' \
+      --preview-window 'right:60%' \
+      --bind "change:reload:$rg_cmd {q} || true" \
+      --bind "ctrl-f:reload:rg --files || true" \
+      --bind "ctrl-r:reload:$rg_cmd {q} || true" \
+      --header "Enter: open | Ctrl-F: file name | Ctrl-R: file content" \
+      --prompt "rg> " \
+  | awk -F: '{print $1 ":" $2}' \
+  | while IFS=: read -r file line; do
+        ${EDITOR:-vim} +"${line:-1}" "$file"
+    done
+}
+
 

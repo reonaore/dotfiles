@@ -1,0 +1,350 @@
+// 既定値を上書きするには、このファイル内にキー バインドを挿入しますauto[]
+[
+  {
+    "key": "ctrl+o ctrl+o",
+    "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "ctrl+o ctrl+e",
+    "command": "workbench.view.explorer",
+    "when": "viewContainer.workbench.view.explorer.enabled"
+  },
+  {
+    "key": "x",
+    "command": "list.toggleExpand",
+    "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+  },
+  {
+    "key": "ctrl+o ctrl+f",
+    "command": "workbench.view.search"
+  },
+  {
+    "key": "ctrl+o ctrl+n",
+    "command": "explorer.newFile"
+  },
+  {
+    "key": "ctrl+o f",
+    "command": "explorer.newFolder"
+  },
+  {
+    "key": "ctrl+o ctrl+d",
+    "command": "deleteFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "ctrl+o ctrl+h",
+    "command": "editor.debug.action.showDebugHover",
+    "when": "editorTextFocus && inDebugMode"
+  },
+  {
+    "key": "ctrl+o ctrl+h",
+    "command": "editor.action.showHover",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+o ctrl+r",
+    "command": "editor.action.rename",
+    "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+o ctrl+f",
+    "command": "workbench.action.terminal.searchWorkspace",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+f",
+    "command": "-workbench.action.terminal.searchWorkspace",
+    "when": "terminalFocus && terminalProcessSupported && terminalTextSelected"
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "workbench.action.terminal.new",
+    "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+  },
+  {
+    "key": "ctrl+v ctrl+s",
+    "command": "workbench.action.terminal.split",
+    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
+  },
+  {
+    "key": "ctrl+shift+]",
+    "command": "workbench.action.terminal.focusPrevious",
+    "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+  },
+  {
+    "key": "ctrl+w ctrl+h",
+    "command": "workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+w ctrl+l",
+    "command": "workbench.action.terminal.focusPreviousPane",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+o ctrl+r",
+    "command": "renameFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "shift+cmd+[BracketLeft]",
+    "command": "workbench.action.terminal.focus"
+  },
+  {
+    "key": "ctrl+]",
+    "command": "editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+  },
+  {
+    "key": "f12",
+    "command": "-editor.action.revealDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+  },
+  {
+    "key": "shift+cmd+[",
+    "command": "-workbench.action.previousEditor"
+  },
+  {
+    "key": "ctrl+backspace",
+    "command": "workbench.action.terminal.killInstance",
+    "when": "terminalHasBeenCreated && terminalTabsFocus || terminalIsOpen && terminalTabsFocus || terminalProcessSupported && terminalTabsFocus"
+  },
+  {
+    "key": "cmd+backspace",
+    "command": "-workbench.action.terminal.killInstance",
+    "when": "terminalHasBeenCreated && terminalTabsFocus || terminalIsOpen && terminalTabsFocus || terminalProcessSupported && terminalTabsFocus"
+  },
+  {
+    "key": "ctrl+backspace",
+    "command": "workbench.action.terminal.sendSequence",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "cmd+backspace",
+    "command": "-workbench.action.terminal.sendSequence",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-refactorPreview.apply",
+    "when": "refactorPreview.enabled && refactorPreview.hasCheckedChanges && focusedView == 'refactorPreview'"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-editor.action.extensioneditor.findPrevious",
+    "when": "webviewFindWidgetFocused && !editorFocus && activeEditor == 'workbench.editor.extension'"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-editor.action.previousMatchFindAction",
+    "when": "editorFocus && findInputFocussed"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-editor.action.webvieweditor.findPrevious",
+    "when": "webviewFindWidgetFocused && !editorFocus && activeEditor == 'WebviewEditor'"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-notebook.cell.executeAndSelectBelow",
+    "when": "notebookCellListFocused && notebookCellType == 'markup' || notebookCellListFocused && notebookMissingKernelExtension && !notebookCellExecuting && notebookCellType == 'code' || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelCount > 0 || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelSourceCount > 0"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-acceptAlternativeSelectedSuggestion",
+    "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-editor.refocusCallHierarchy",
+    "when": "callHierarchyVisible"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-editor.refocusTypeHierarchy",
+    "when": "typeHierarchyVisible"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-workbench.action.terminal.findNext",
+    "when": "terminalFindInputFocused && terminalHasBeenCreated || terminalFindInputFocused && terminalProcessSupported"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-workbench.action.terminal.sendSequence",
+    "when": "terminalFocus && terminalShellIntegrationEnabled && !accessibilityModeEnabled && terminalShellType == 'pwsh'"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-jupyter.execSelectionInteractive",
+    "when": "editorTextFocus && isWorkspaceTrusted && jupyter.ownsSelection && !findInputFocussed && !jupyter.webExtension && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-python.execSelectionInTerminal",
+    "when": "editorTextFocus && !findInputFocussed && !jupyter.ownsSelection && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-jupyter.runcurrentcelladvance",
+    "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-interactive.execute",
+    "when": "!notebookKernel && resourceScheme == 'vscode-interactive' || resourceScheme == 'vscode-interactive' && notebookKernel =~ /^ms-toolsai.jupyter\\//"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-markdown.extension.onShiftEnterKey",
+    "when": "editorTextFocus && !editorHasMultipleSelections && !editorReadonly && !markdown.extension.editor.cursor.inFencedCodeBlock && !markdown.extension.editor.cursor.inMathEnv && !suggestWidgetVisible && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-notebook.cell.executeAndSelectBelow",
+    "when": "notebookCellListFocused && notebookCellType == 'code' || editorTextFocus && inputFocus && notebookEditorFocused"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-acceptRenameInputWithPreview",
+    "when": "config.editor.rename.enablePreview && editorFocus && renameInputVisible"
+  },
+  {
+    "key": "shift+enter",
+    "command": "editor.action.quickFix",
+    "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+.",
+    "command": "-editor.action.quickFix",
+    "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+enter",
+    "command": "problems.action.showQuickFixes",
+    "when": "problemFocus"
+  },
+  {
+    "key": "cmd+.",
+    "command": "-problems.action.showQuickFixes",
+    "when": "problemFocus"
+  },
+  {
+    "key": "shift+enter",
+    "command": "workbench.action.terminal.showQuickFixes",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "cmd+.",
+    "command": "-workbench.action.terminal.showQuickFixes",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "shift+enter",
+    "command": "acceptSelectedCodeAction",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "key": "cmd+.",
+    "command": "-acceptSelectedCodeAction",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "key": "ctrl+o space",
+    "command": "editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+space",
+    "command": "-editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "search.action.focusSearchList",
+    "when": "hasSearchResult && searchViewletFocus"
+  },
+  {
+    "key": "shift+cmd+t",
+    "command": "dart.goToTestOrImplementationFile"
+  },
+  {
+    "key": "ctrl+o ctrl+t",
+    "command": "workbench.action.tasks.runTask"
+  },
+  {
+    "key": "shift shift",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "cmd+p",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
+    "key": "Enter",
+    "command": "list.select",
+    "when": "explorerViewletFocus && explorerViewletVisible && !explorerResourceIsFolder && !inputFocus"
+  },
+  {
+    "key": "ctrl+o ctrl+i",
+    "command": "inlineChat2.reveal",
+    "when": "inlineChatHasEditsAgent && !chatEdits.isGlobalEditingSession && chatEdits.requestCount >= 1"
+  },
+  {
+    "key": "cmd+i",
+    "command": "-inlineChat2.reveal",
+    "when": "inlineChatHasEditsAgent && !chatEdits.isGlobalEditingSession && chatEdits.requestCount >= 1"
+  },
+  {
+    "key": "ctrl+o ctrl+i",
+    "command": "inlineChat.start",
+    "when": "editorFocus && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
+  },
+  {
+    "key": "cmd+i",
+    "command": "-inlineChat.start",
+    "when": "editorFocus && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasProvider && inlineChatPossible && !editorReadonly && !editorSimpleInput"
+  },
+  {
+    "key": "ctrl+o ctrl+c",
+    "command": "workbench.action.chat.open",
+    "when": "!chatSetupDisabled && !chatSetupHidden"
+  },
+  {
+    "key": "ctrl+cmd+i",
+    "command": "-workbench.action.chat.open",
+    "when": "!chatSetupDisabled && !chatSetupHidden"
+  },
+  {
+    "key": "ctrl+o ctrl+a",
+    "command": "workbench.action.chat.openAgent",
+    "when": "config.chat.agent.enabled && !chatSetupDisabled && !chatSetupHidden"
+  },
+  {
+    "key": "shift+cmd+i",
+    "command": "-workbench.action.chat.openAgent",
+    "when": "config.chat.agent.enabled && !chatSetupDisabled && !chatSetupHidden"
+  },
+  {
+    "key": "x",
+    "command": "list.collapse",
+    "when": "listFocus && treeElementCanCollapse && !inputFocus && !treestickyScrollFocused || listFocus && treeElementHasParent && !inputFocus && !treestickyScrollFocused"
+  },
+  {
+    "key": "o",
+    "command": "list.select",
+    "when": "explorerViewletFocus && explorerViewletVisible && !explorerResourceIsFolder && !inputFocus"
+  },
+  {
+    "key": "ctrl+d",
+    "command": "vscode-neovim.send",
+    "args": "<C-d>",
+    "when": "editorTextFocus && neovim.init"
+  },
+  {
+    "key": "ctrl+u",
+    "command": "vscode-neovim.send",
+    "args": "<C-u>",
+    "when": "editorTextFocus && neovim.init"
+  }
+]
