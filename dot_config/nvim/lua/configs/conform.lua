@@ -5,6 +5,8 @@ local options = {
     zsh = { "beautysh" },
     bash = { "beautysh" },
     sh = { "beautysh" },
+    yaml = { "yamlls" },
+    toml = { "tombi" }
     -- css = { "prettier" },
     -- html = { "prettier" },
   },
