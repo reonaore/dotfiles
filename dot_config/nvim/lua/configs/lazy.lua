@@ -1,5 +1,10 @@
 return {
-  defaults = { lazy = true },
+  defaults = {
+    lazy = true,
+    cond = function()
+      return not vim.g.vscode
+    end,
+  },
   install = { colorscheme = { "nvchad" } },
 
   ui = {
