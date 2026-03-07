@@ -1,4 +1,4 @@
-keybind = global:unconsumed:ctrl+shift+t=toggle_quick_terminal
+keybind = global:unconsumed:ctrl+shift+space=toggle_quick_terminal
 keybind = unconsumed:cmd+r=reload_config
 background-opacity = 0.6
 theme = TokyoNight night
