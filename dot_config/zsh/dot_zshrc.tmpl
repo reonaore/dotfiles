@@ -1,24 +1,4 @@
-export LC_ALL=en_US.UTF-8
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_STATE_HOME="$HOME/.local/state"
-
-{{ if eq .chezmoi.os "darwin" }}
-export XDG_RUNTIME_DIR="$TMPDIR"
-{{ else if eq .chezmoi.os "linux" }}
-export EDITOR="nvim"
-# if snap is available
-if command -v snap &> /dev/null; then
-    export PATH="/snap/bin:$PATH"
-fi
-
-{{ end }}
-
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-
 fpath+=($ZDOTDIR/completions)
-# source $ZDOTDIR/zplug.zsh
 source $ZDOTDIR/zinit
 
 # CDR settings
@@ -32,12 +12,14 @@ if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]
 fi
 
 # completion
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -C
 zstyle ':completion:*' completer _complete _correct
 zstyle ':completion:*' menu select interactive
 zstyle ':completion:*:rm:*' menu false
 zstyle ':completion:*:default' list-colors
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.cache/zsh
 
 # History
 export HISTSIZE=1000
@@ -61,6 +43,7 @@ PS1='[%B%F{cyan}%n%f%b@%m %B%F{green}%~%f%b %F{red}$(__git_ps1 "(%s)")%f]
 
 # Alias
 alias vim='nvim'
+alias fzf='fzf-tmux -p 80% --border'
 alias ghub='(){ hub browse $(ghq list | fzf --reverse | cut -d "/" -f2,3) }'
 alias gi='(){ cd $(ghq root)/$(ghq list | fzf --reverse) }'
 alias gsw='(){gb | fzf --reverse | cut -b 3- | xargs git switch}'

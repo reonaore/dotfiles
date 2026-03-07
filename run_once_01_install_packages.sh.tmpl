@@ -70,3 +70,7 @@ if [ "$SHELL" != "$(which zsh)" ]; then
     echo 'run chsh -s "$(which zsh)" to change your default shell to zsh after applying dotfiles.'
 fi
 
+if [ "$ZDOTDIR" != "$HOME/.config/zsh" ]; then
+    echo 'run export ZDOTDIR="$HOME/.config/zsh" >> /etc/zshenv'
+    echo 'to set ZDOTDIR to ~/.config/zsh'
+fi
