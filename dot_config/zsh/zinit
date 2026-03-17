@@ -24,10 +24,9 @@ zinit light-mode for \
 
 
 zinit light "zsh-users/zsh-autosuggestions"
-zinit light "zsh-users/zsh-syntax-highlighting"
+zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light "zsh-users/zsh-history-substring-search"
 zinit light "zsh-users/zsh-completions"
-# zinit light "zsh-users/zaw"
 zinit snippet "https://raw.githubusercontent.com/git/git/refs/heads/master/contrib/completion/git-prompt.sh"
 zinit snippet OMZP::common-aliases
 zinit snippet OMZL::git.zsh
