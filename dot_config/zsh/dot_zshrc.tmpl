@@ -1,4 +1,5 @@
 fpath+=($ZDOTDIR/completions)
+fpath+=($BREW_PATH/../share/zsh/site-functions)
 source $ZDOTDIR/zinit
 
 # CDR settings
@@ -21,6 +22,11 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.cache/zsh
 
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_MANUAL_REBIND=true
+ZSH_AUTOSUGGEST_STRATEGY=(history)
+ZSH_HIGHLIGHT_MAXLENGTH=256
+
 # History
 export HISTSIZE=1000
 export SAVEHIST=100000
@@ -42,7 +48,7 @@ alias fzf='fzf-tmux -p 80% --border'
 alias ghub='(){ hub browse $(ghq list | fzf --reverse | cut -d "/" -f2,3) }'
 alias gi='(){ cd $(ghq root)/$(ghq list | fzf --reverse) }'
 alias gsw='(){gb | fzf --reverse | cut -b 3- | xargs git switch}'
-alias pr='(){ gh pr list | fzf --reverse | cut -f 1 | xargs gh browse}'
+alias pr='(){ gh pr view -w }'
 
 {{ if eq .chezmoi.os "darwin" }}
 
@@ -61,7 +67,7 @@ alias ff='find_in_files'
 {{ if eq .chezmoi.os "darwin" }}
 
 eval $(/opt/homebrew/bin/brew shellenv)
-source $XDG_DATA_HOME/iterm2/shell_integration.zsh
+# source $XDG_DATA_HOME/iterm2/shell_integration.zsh
 
 {{ else if eq .chezmoi.os "linux" }}
 
