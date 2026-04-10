@@ -10,7 +10,7 @@ fi
 TMPFILE="$(mktemp -t prompt)"
 trap 'rm -f "$TMPFILE"' EXIT
 
-tmux display-popup -E -w 80% -h 70% -T "Prompt" "nvim $TMPFILE"
+tmux display-popup -E -w 80% -h 70% -T "Prompt" "nvim +'set ft=markdown' $TMPFILE"
 
 if [ -s "$TMPFILE" ]; then
     CONTENT="$(cat "$TMPFILE")"
