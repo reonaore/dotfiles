@@ -4,9 +4,8 @@ return {
   opts = {
     linters_by_ft = {
       markdown = { "markdownlint" },
+      python = { "ruff" },
     },
   },
-  config = function()
-    require "configs.nvim-lint"
-  end,
+  config = function() end,
 }
