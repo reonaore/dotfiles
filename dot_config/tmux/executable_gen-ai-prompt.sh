@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 TARGET_PANE="$1"
+CMD_PATH="$2"
 
 if [ -z "${TMUX:-}" ]; then
     echo "Error: This script must be run inside a tmux session." >&2
@@ -10,7 +11,7 @@ fi
 TMPFILE="$(mktemp -t prompt)"
 trap 'rm -f "$TMPFILE"' EXIT
 
-tmux display-popup -E -w 80% -h 70% -T "Prompt" "nvim +'set ft=markdown' $TMPFILE"
+tmux popup -E -w 80% -h 70% -T "Prompt" "cd $CMD_PATH && $SHELL -i -c 'nvim +\"set ft=markdown\" \"$TMPFILE\"'"
 
 if [ -s "$TMPFILE" ]; then
     CONTENT="$(cat "$TMPFILE")"
