@@ -66,6 +66,7 @@ else
   map("n", "<C-o><C-f>", "<cmd>FzfLua live_grep<CR>", { noremap = true, desc = "Find Text" })
   map("n", "<leader>ff", "<cmd>FzfLua files<CR>", { noremap = true, desc = "Find Files" })
   map("n", "<C-o><C-o>", "<cmd>FzfLua commands<CR>", { noremap = true, desc = "Find Commands" })
+  map("n", "<leader>mp", "<cmd>RenderMarkdown toggle<CR>", { desc = "Toggle markdown preview" })
 end
 
 if vim.g.vscode then
