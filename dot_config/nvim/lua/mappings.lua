@@ -60,8 +60,11 @@ else
   map("n", "gd", vim.lsp.buf.definition, { noremap = true, desc = "LSP Go to definition" })
   map("n", "<C-o><C-r>", vim.lsp.buf.rename, { noremap = true, desc = "Rename symbol" })
   map("n", "<C-o><C-f>", "<cmd>FzfLua live_grep<CR>", { noremap = true, desc = "Find Text" })
+  map("n", "<C-o><C-g>", "<cmd>FzfLua git_status<CR>", { noremap = true, desc = "Git Status" })
+  map("n", "<leader>gt", "<cmd>FzfLua git_status<CR>", { noremap = true, desc = "Git Status" })
   map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { noremap = true, desc = "Find Text" })
   map("n", "<leader>ff", "<cmd>FzfLua files<CR>", { noremap = true, desc = "Find Files" })
+  map("n", "<C-o><C-e>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
 end
 
 if vim.g.vscode then
