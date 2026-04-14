@@ -1,7 +1,7 @@
 local options = {
   formatters_by_ft = {
     lua = { "lua_ls" },
-    markdown = { "markdownlint" },
+    markdown = { "markdownlint-cli2" },
     zsh = { "beautysh" },
     bash = { "beautysh" },
     sh = { "beautysh" },

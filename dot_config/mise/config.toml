@@ -7,11 +7,20 @@ python = "3.11"
 usage = "latest"
 uv = "latest"
 yq = "latest"
+ty = "latest"
+ruff = "latest"
 ghq = "latest"
 rg = "latest"
 fzf = "latest"
 chezmoi = "latest"
-"npm:cspell" = "latest"
+markdownlint-cli2 = "latest"
+fd = "latest"
+stylua = "latest"
+lua-language-server = "latest"
+
+[shell_alias]
+pr = "gh pr view --web"
+prr = "gh pr ready"
 
 [settings]
 experimental = true
