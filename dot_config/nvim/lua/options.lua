@@ -12,5 +12,6 @@ vim.opt.listchars = {
   nbsp = "␣",
   extends = "→",
   precedes = "←",
+  eol = "↲",
 }
 vim.opt.fixendofline = true
