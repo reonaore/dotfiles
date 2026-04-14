@@ -54,6 +54,9 @@ if vim.g.vscode then
   map("v", "<leader>c", function()
     vscode.action "editor.action.commentLines"
   end)
+  map("n", "<leader>x", function()
+    vscode.action "workbench.action.closeActiveEditor"
+  end)
 else
   map("v", "<leader>c", "<leader>/", { remap = true })
   map("n", "gi", vim.lsp.buf.implementation, { noremap = true, desc = "LSP Go to implementation" })
