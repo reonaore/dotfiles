@@ -17,6 +17,7 @@ markdownlint-cli2 = "latest"
 fd = "latest"
 stylua = "latest"
 lua-language-server = "latest"
+"npm:yaml-language-server" = "latest"
 
 [shell_alias]
 pr = "gh pr view --web"
