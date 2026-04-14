@@ -1,4 +1,4 @@
-local coreHook = function()
+local hook = function()
   local fzf = require("fzf-lua")
   fzf.complete_file({
     cmd = "rg --files",
@@ -9,6 +9,6 @@ end
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.md",
   callback = function()
-    vim.keymap.set("i", "@", coreHook, { silent = true, desc = "Insert file path" })
+    vim.keymap.set("i", "@", hook, { silent = true, desc = "Insert file path" })
   end,
 })
