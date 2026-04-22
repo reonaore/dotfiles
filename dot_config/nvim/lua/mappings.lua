@@ -68,6 +68,12 @@ else
   map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { noremap = true, desc = "Find Text" })
   map("n", "<C-o><C-f>", "<cmd>FzfLua live_grep<CR>", { noremap = true, desc = "Find Text" })
   map("n", "<leader>ff", "<cmd>FzfLua files<CR>", { noremap = true, desc = "Find Files" })
+  map("n", "<leader>fa", function()
+      require("fzf-lua").files({
+        cmd = "fd --no-ignore --no-hidden --type file"
+      })
+    end,
+    { noremap = true, desc = "Find All Files" })
   map("n", "<C-o><C-o>", "<cmd>FzfLua commands<CR>", { noremap = true, desc = "Find Commands" })
   map("n", "ms", "<cmd>FzfLua marks<CR>", { noremap = true, desc = "Find Marks" })
   map("n", "<leader>mp", "<cmd>RenderMarkdown toggle<CR>", { desc = "Toggle markdown preview" })
