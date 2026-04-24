@@ -19,6 +19,7 @@ stylua = "latest"
 dust = "latest"
 lua-language-server = "latest"
 "npm:yaml-language-server" = "latest"
+"npm:yarn" = "latest"
 
 [shell_alias]
 pr = "gh pr view --web"
