@@ -16,6 +16,7 @@ chezmoi = "latest"
 markdownlint-cli2 = "latest"
 fd = "latest"
 stylua = "latest"
+dust = "latest"
 lua-language-server = "latest"
 "npm:yaml-language-server" = "latest"
 
