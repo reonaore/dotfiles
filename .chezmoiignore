@@ -1,6 +1,7 @@
 README.md
 .github
 */.vscode
+.stylua.toml
 
 {{- if ne .chezmoi.os "linux" }}
 dot_config/dircolors/colorrc
