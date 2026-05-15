@@ -75,6 +75,12 @@ else
   end, { noremap = true, desc = "Find All Files" })
   map("n", "<C-o><C-o>", "<cmd>FzfLua commands<CR>", { noremap = true, desc = "Find Commands" })
   map("n", "ms", "<cmd>FzfLua marks<CR>", { noremap = true, desc = "Find Marks" })
+  map(
+    "n",
+    "<leader>mp",
+    "<cmd>RenderMarkdown toggle<CR>",
+    { noremap = true, desc = "Toggle Markdown Preview" }
+  )
 end
 
 if vim.g.vscode then
