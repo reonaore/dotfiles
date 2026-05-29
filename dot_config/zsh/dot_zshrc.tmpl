@@ -45,10 +45,24 @@ PS1='[%B%F{cyan}%n%f%b@%m %B%F{green}%~%f%b %F{red}${_git_prompt_info}%f]
 # Alias
 alias vim='nvim'
 alias fzf='fzf-tmux -p 80% --border'
-alias ghub='(){ hub browse $(ghq list | fzf --reverse | cut -d "/" -f2,3) }'
-alias gi='(){ cd $(ghq root)/$(ghq list | fzf --reverse) }'
-alias gsw='(){gb | fzf --reverse | cut -b 3- | xargs git switch}'
-alias pr='(){ gh pr view -w }'
+ghub() {
+  local repo
+  repo=$(ghq list | fzf --reverse --query="${1:-}" --select-1 --exit-0) || return
+  hub browse "$(echo "$repo" | cut -d '/' -f2,3)"
+}
+
+gi() {
+  local repo
+  repo=$(ghq list | fzf --reverse --query="${1:-}" --select-1 --exit-0) || return
+  cd "$(ghq root)/$repo"
+}
+# alias gsw='(){gb | fzf --reverse | cut -b 3- | xargs git switch}'
+unalias gsw 2>/dev/null
+gsw() {
+  gb | fzf --reverse --query="${1:-}" --select-1 --exit-0 | cut -b 3- | xargs git switch
+}
+
+alias pr='gh pr view -w'
 
 {{ if eq .chezmoi.os "darwin" }}
 
