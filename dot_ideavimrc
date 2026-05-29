@@ -108,6 +108,7 @@ nmap <leader>rp <Action>(ReplaceInPath)
 nmap <leader>sw <Action>($SearchWeb)
 nmap <leader>fw <Action>(com.github.reonaore.fuzzyfinderintellijplugin.actions.OpenLiveGrepAction)
 nmap <leader>ff <Action>(com.github.reonaore.fuzzyfinderintellijplugin.actions.OpenFuzzyFinderAction)
+nmap <leader>fb <Action>(com.github.reonaore.fuzzyfinderintellijplugin.actions.OpenTabFinderAction)
 
 " tag
 nmap <leader>fu <Action>(FindUsages)
