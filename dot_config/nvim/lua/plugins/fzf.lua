@@ -9,8 +9,6 @@ return {
   ---@type fzf-lua.Config|{}
   ---@diagnostic disable: missing-fields
   opts = {},
-  config = function()
-    require "configs.markdown-file-insert"
-  end,
+  config = {},
   ---@diagnostic enable: missing-fields
 }
