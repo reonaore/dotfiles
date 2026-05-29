@@ -6,6 +6,8 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export EDITOR="nvim"
 export BREW_PATH="/opt/homebrew/bin"
 export FZF_DEFAULT_COMMAND='fd --type file --hidden --no-ignore'
+export MANPAGER="bat -plman"
+
 typeset -U path
 
 {{ if eq .chezmoi.os "darwin" }}
