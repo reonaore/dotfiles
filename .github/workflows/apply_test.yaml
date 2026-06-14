@@ -6,6 +6,9 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   apply:
     strategy:
@@ -20,6 +23,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Install chezmoi
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           # if curl is available
           if command -v curl >/dev/null 2>&1; then
