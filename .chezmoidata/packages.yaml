@@ -12,8 +12,8 @@ packages:
       - fzf
       - lazygit
       - lazydocker
-      - ghostty
     casks:
+      - ghostty
       - font-jetbrains-mono-nerd-font
       - font-udev-gothic
   linux:
