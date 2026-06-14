@@ -1,5 +1,10 @@
 fpath+=($ZDOTDIR/completions)
-fpath+=($BREW_PATH/../share/zsh/site-functions)
+{{ if eq .chezmoi.os "darwin" }}
+if command -v /opt/homebrew/bin/brew >/dev/null 2>&1; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    fpath+=("$(brew --prefix)/share/zsh/site-functions")
+fi
+{{ end }}
 source $ZDOTDIR/zinit
 
 # CDR settings
@@ -77,17 +82,6 @@ alias ls='ls --color=auto'
 {{ end }}
 
 alias ff='find_in_files'
-
-{{ if eq .chezmoi.os "darwin" }}
-
-eval $(/opt/homebrew/bin/brew shellenv)
-# source $XDG_DATA_HOME/iterm2/shell_integration.zsh
-
-{{ else if eq .chezmoi.os "linux" }}
-
-test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-{{ end }}
 
 eval "$(~/.local/bin/mise activate zsh)"
 

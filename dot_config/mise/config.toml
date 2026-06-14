@@ -12,6 +12,10 @@ ruff = "latest"
 ghq = "latest"
 rg = "latest"
 fzf = "latest"
+neovim = "latest"
+shellcheck = "latest"
+lazygit = "latest"
+lazydocker = "latest"
 chezmoi = "latest"
 markdownlint-cli2 = "latest"
 fd = "latest"
@@ -27,4 +31,3 @@ prr = "gh pr ready"
 
 [settings]
 experimental = true
-

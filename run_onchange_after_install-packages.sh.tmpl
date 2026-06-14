@@ -2,15 +2,62 @@
 
 set -euo pipefail
 
-# Brewfile hash: {{ include "Brewfile" | sha256sum }}
-
+{{ if eq .chezmoi.os "darwin" -}}
 if ! command -v brew >/dev/null 2>&1; then
   echo "Homebrew is not installed; skipping package installation." >&2
   exit 0
 fi
 
+brewfile=$(mktemp)
+trap 'rm -f "$brewfile"' EXIT
+
+cat >"$brewfile" <<'EOF'
+{{ range .packages.darwin.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .packages.darwin.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+EOF
+
 brew bundle check \
-  --file="{{ .chezmoi.sourceDir }}/Brewfile" \
+  --file="$brewfile" \
   >/dev/null 2>&1 ||
 brew bundle install \
-  --file="{{ .chezmoi.sourceDir }}/Brewfile"
+  --file="$brewfile"
+
+{{ else if eq .chezmoi.os "linux" -}}
+if command -v apt-get >/dev/null 2>&1 && command -v dpkg-query >/dev/null 2>&1; then
+  packages=(
+{{- range .packages.linux.apt }}
+    {{ . | quote }}
+{{- end }}
+  )
+
+  missing=()
+  for package in "${packages[@]}"; do
+    if ! dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -q "install ok installed"; then
+      missing+=("$package")
+    fi
+  done
+
+  if [ "${#missing[@]}" -gt 0 ]; then
+    sudo apt-get update
+    sudo apt-get install -y "${missing[@]}"
+  fi
+else
+  echo "apt-get or dpkg-query is not available; skipping apt package installation." >&2
+fi
+
+if command -v snap >/dev/null 2>&1; then
+{{- range .packages.linux.snap }}
+  if ! snap list {{ .name | quote }} >/dev/null 2>&1; then
+    sudo snap install {{ .name | quote }}{{ if .classic }} --classic{{ end }}
+  fi
+{{- end }}
+else
+  echo "snap is not available; skipping snap package installation." >&2
+fi
+{{ else -}}
+echo "No package installer configured for {{ .chezmoi.os }}; skipping package installation." >&2
+{{ end -}}

@@ -1,0 +1,35 @@
+packages:
+  darwin:
+    brews:
+      - vim
+      - nvim
+      - wget
+      - curl
+      - shellcheck
+      - coreutils
+      - git
+      - tmux
+      - fzf
+      - lazygit
+      - lazydocker
+      - ghostty
+    casks:
+      - font-jetbrains-mono-nerd-font
+      - font-udev-gothic
+  linux:
+    apt:
+      - build-essential
+      - procps
+      - curl
+      - file
+      - git
+      - unzip
+      - zsh
+      - snapd
+      - wget
+      - coreutils
+      - vim
+      - tmux
+    snap:
+      - name: ghostty
+        classic: true
