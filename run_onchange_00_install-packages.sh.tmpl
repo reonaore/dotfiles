@@ -58,6 +58,10 @@ if command -v snap >/dev/null 2>&1; then
 else
   echo "snap is not available; skipping snap package installation." >&2
 fi
+
+if command -v locale-gen >/dev/null 2>&1; then
+  sudo locale-gen "en_US.UTF-8"
+fi
 {{ else -}}
 echo "No package installer configured for {{ .chezmoi.os }}; skipping package installation." >&2
 {{ end -}}
