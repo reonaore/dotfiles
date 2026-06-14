@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# chezmoi reruns run_onchange scripts when the rendered script changes.
+# Keep this checksum tied to the source mise config so mise install runs only
+# after dot_config/mise/config.toml changes.
+# mise config checksum: {{ include "dot_config/mise/config.toml" | sha256sum }}
+
+if ! command -v mise >/dev/null 2>&1; then
+  echo "mise is not installed; skipping mise install." >&2
+  exit 0
+fi
+
+mkdir -p "$HOME/.config/mise"
+touch "$HOME/.config/mise/config.local.toml"
+
+mise install
