@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# Brewfile hash: {{ include "Brewfile" | sha256sum }}
+
+if ! command -v brew >/dev/null 2>&1; then
+  echo "Homebrew is not installed; skipping package installation." >&2
+  exit 0
+fi
+
+brew bundle check \
+  --file="{{ .chezmoi.sourceDir }}/Brewfile" \
+  >/dev/null 2>&1 ||
+brew bundle install \
+  --file="{{ .chezmoi.sourceDir }}/Brewfile"
