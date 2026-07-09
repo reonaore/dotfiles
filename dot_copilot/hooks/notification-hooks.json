@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "hooks": {
+    "Stop": [
+      {
+        "type": "command",
+        "bash": "python3 ~/.copilot/hooks/scripts/notify.py",
+        "timeoutSec": 5
+      }
+    ],
+    "SessionEnd": [
+      {
+        "type": "command",
+        "bash": "python3 ~/.copilot/hooks/scripts/notify.py",
+        "timeoutSec": 5
+      }
+    ],
+    "PreToolUse": [
+      {
+        "type": "command",
+        "bash": "python3 ~/.copilot/hooks/scripts/notify.py",
+        "timeoutSec": 5
+      }
+    ],
+    "notification": [
+      {
+        "type": "command",
+        "bash": "python3 ~/.copilot/hooks/scripts/notify.py",
+        "timeoutSec": 5
+      }
+    ]
+  }
+}
