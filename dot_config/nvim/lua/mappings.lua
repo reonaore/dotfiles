@@ -66,6 +66,9 @@ if vim.g.vscode then
   map("n", "<leader>fb", function()
     vscode.action("workbench.action.quickOpen", { args = { "edt " } })
   end)
+  map("n", "s", function()
+    vscode.action("jumpy2.toggle")
+  end)
 else
   map("v", "<leader>c", "<leader>/", { remap = true })
   map("n", "gi", vim.lsp.buf.implementation, { noremap = true, desc = "LSP Go to implementation" })
@@ -90,6 +93,12 @@ else
     "<cmd>RenderMarkdown toggle<CR>",
     { noremap = true, desc = "Toggle Markdown Preview" }
   )
+  map("n", "]g", function()
+    vim.diagnostic.jump({ count = 1 })
+  end, { desc = "Go to next diagnostic" })
+  map("n", "[g", function()
+    vim.diagnostic.jump({ count = 1 })
+  end, { desc = "Go to previous diagnostic" })
 end
 
 if vim.g.vscode then
