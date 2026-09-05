@@ -12,6 +12,7 @@ packages:
       - fzf
       - lazygit
       - lazydocker
+      - docker
     casks:
       - ghostty
       - font-jetbrains-mono-nerd-font
@@ -30,6 +31,12 @@ packages:
       - coreutils
       - vim
       - tmux
+    docker:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
     snap:
       - name: ghostty
         classic: true
