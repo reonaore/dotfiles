@@ -8,6 +8,7 @@ packages:
       - git
       - tmux
       - fzf
+      - docker
     casks:
       - ghostty
       - font-jetbrains-mono-nerd-font
@@ -27,6 +28,12 @@ packages:
       - vim
       - tmux
       - fzf # Includes fzf-tmux.
+    docker:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
     snap:
       - name: ghostty
         classic: true
