@@ -15,3 +15,6 @@ sh -c "$(wget -qO- get.chezmoi.io)" -- init --apply reonaore
 ```bash
 chsh -s "$(which zsh)"
 ```
+
+Restart the terminal (or run `exec zsh`) to load the configuration from
+`$ZDOTDIR`.
