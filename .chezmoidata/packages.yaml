@@ -30,6 +30,7 @@ packages:
       - coreutils
       - vim
       - tmux
+      - fzf # Includes fzf-tmux.
     snap:
       - name: ghostty
         classic: true
