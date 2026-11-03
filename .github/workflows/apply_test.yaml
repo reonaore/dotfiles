@@ -1,6 +1,7 @@
 name: Apply dotfiles
 
 on:
+  pull_request:
   push:
     branches:
       - main
@@ -9,31 +10,45 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   apply:
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        system: [client, server]
-        exclude:
-          - os: macos-latest
-            system: server
 
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Check out the tested revision
+        uses: actions/checkout@v6
+
       - name: Install chezmoi
+        run: |
+          sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Apply the tested revision
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
+        run: chezmoi apply --source "$GITHUB_WORKSPACE" --force --no-tty
+
+      - name: Verify idempotent apply
         env:
           GITHUB_TOKEN: ${{ github.token }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          # if curl is available
-          if command -v curl >/dev/null 2>&1; then
-            sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply reonaore
-          # if wget is available
-          elif command -v wget >/dev/null 2>&1; then
-            sh -c "$(wget -qO- get.chezmoi.io)" -- init --apply reonaore
-          else
-            echo "Error: Neither curl nor wget is available to install chezmoi."
-            exit 1
-          fi
+          bash .github/scripts/assert-chezmoi-clean.sh "$GITHUB_WORKSPACE"
+          chezmoi apply --source "$GITHUB_WORKSPACE" --force --no-tty
+          bash .github/scripts/assert-chezmoi-clean.sh "$GITHUB_WORKSPACE"
+
+      - name: Smoke test Neovim and tmux
+        run: bash .github/scripts/smoke-test.sh
+
+      - name: Verify smoke tests did not change managed files
+        if: always()
+        run: bash .github/scripts/assert-chezmoi-clean.sh "$GITHUB_WORKSPACE"

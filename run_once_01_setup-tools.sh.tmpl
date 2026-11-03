@@ -10,10 +10,6 @@ if [ ! -d ~/.local/share/zinit/zinit.git ]; then
     git clone https://github.com/zdharma-continuum/zinit.git ~/.local/share/zinit/zinit.git
 fi
 
-if [ ! -d ~/.config/nvim ]; then
-    git clone https://github.com/NvChad/starter ~/.config/nvim
-fi
-
 # if mise is not installed, install it
 if ! command -v mise >/dev/null 2>&1; then
     curl https://mise.run | sh
