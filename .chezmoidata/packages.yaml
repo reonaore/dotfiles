@@ -2,16 +2,12 @@ packages:
   darwin:
     brews:
       - vim
-      - nvim
       - wget
       - curl
-      - shellcheck
       - coreutils
       - git
       - tmux
       - fzf
-      - lazygit
-      - lazydocker
     casks:
       - ghostty
       - font-jetbrains-mono-nerd-font
