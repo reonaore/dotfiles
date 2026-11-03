@@ -8,8 +8,8 @@ packages:
       - git
       - tmux
       - fzf
-      - docker
     casks:
+      - docker-desktop
       - ghostty
       - font-jetbrains-mono-nerd-font
       - font-udev-gothic
