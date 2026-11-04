@@ -35,8 +35,8 @@ map K {
 imap jk <Esc>
 
 " location
-nmap <C-i> <Action>(Back)
-nmap <C-o> <Action>(Forward)
+" nmap <C-i> <Action>(Back)
+nmap <C-t> <Action>(Back)
 
 " buffer (buffer < window < tab)
 nmap <leader>xx <Action>(CloseContent)
