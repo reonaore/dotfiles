@@ -24,18 +24,27 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check out the tested revision
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      - name: Install chezmoi
-        run: |
-          sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Add local executables to PATH
+        run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Apply the tested revision
         env:
           GITHUB_TOKEN: ${{ github.token }}
           GH_TOKEN: ${{ github.token }}
-        run: chezmoi apply --source "$GITHUB_WORKSPACE" --force --no-tty
+        run: |
+          if [[ "$RUNNER_OS" == macOS ]]; then
+            bash bootstrap-macos.sh --source "$GITHUB_WORKSPACE" --force --no-tty
+          else
+            installer=$(curl -fsSL https://get.chezmoi.io)
+            sh -c "$installer" -- -b "$HOME/.local/bin"
+            chezmoi apply --source "$GITHUB_WORKSPACE" --force --no-tty
+          fi
+
+      - name: Check macOS bootstrap prerequisites
+        if: runner.os == 'macOS'
+        run: bash .github/scripts/test-macos-bootstrap.sh
 
       - name: Verify idempotent apply
         env:

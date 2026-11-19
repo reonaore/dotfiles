@@ -1,0 +1,9 @@
+if ! brew_bin=$(command -v brew) || [[ ! -x "$brew_bin" ]]; then
+  case "$(uname -m)" in
+    arm64) brew_bin=/opt/homebrew/bin/brew ;;
+    x86_64) brew_bin=/usr/local/bin/brew ;;
+  esac
+  if [[ ! -x "$brew_bin" ]]; then
+    brew_bin=
+  fi
+fi

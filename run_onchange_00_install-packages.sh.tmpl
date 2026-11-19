@@ -3,10 +3,29 @@
 set -euo pipefail
 
 {{ if eq .chezmoi.os "darwin" -}}
-if ! command -v brew >/dev/null 2>&1; then
-  echo "Homebrew is not installed; skipping package installation." >&2
-  exit 0
+{{ includeTemplate "find-brew" . -}}
+if [[ -z "$brew_bin" ]]; then
+  if [[ $(uname -m) != arm64 ]]; then
+    echo 'The official Homebrew installer requires Apple Silicon in a native terminal. On Intel, make an existing brew available and rerun chezmoi apply.' >&2
+    exit 1
+  fi
+
+  if [[ ! -t 0 ]] && ! { exec </dev/tty; } 2>/dev/null; then
+    echo 'Homebrew setup needs an interactive terminal. Open Terminal and rerun chezmoi apply.' >&2
+    exit 1
+  fi
+
+  installer=$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+  /bin/bash -c "$installer"
+  brew_bin=/opt/homebrew/bin/brew
+  if [[ ! -x "$brew_bin" ]]; then
+    echo 'Homebrew setup did not produce /opt/homebrew/bin/brew. Resolve the installer error and rerun chezmoi apply.' >&2
+    exit 1
+  fi
 fi
+
+brew_env=$("$brew_bin" shellenv bash)
+eval "$brew_env"
 
 brewfile=$(mktemp)
 trap 'rm -f "$brewfile"' EXIT
@@ -20,10 +39,10 @@ cask {{ . | quote }}
 {{ end -}}
 EOF
 
-brew bundle check \
+"$brew_bin" bundle check \
   --file="$brewfile" \
   >/dev/null 2>&1 ||
-brew bundle install \
+"$brew_bin" bundle install \
   --file="$brewfile"
 
 {{ else if eq .chezmoi.os "linux" -}}

@@ -1,9 +1,11 @@
 fpath+=($ZDOTDIR/completions)
-{{ if eq .chezmoi.os "darwin" }}
-if command -v /opt/homebrew/bin/brew >/dev/null 2>&1; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-    fpath+=("$(brew --prefix)/share/zsh/site-functions")
+{{ if eq .chezmoi.os "darwin" -}}
+{{ includeTemplate "find-brew" . -}}
+if [[ -n "$brew_bin" ]] && brew_env=$("$brew_bin" shellenv zsh) && brew_prefix=$("$brew_bin" --prefix); then
+    eval "$brew_env"
+    fpath+=("$brew_prefix/share/zsh/site-functions")
 fi
+unset brew_bin brew_env brew_prefix
 {{ end }}
 source $ZDOTDIR/zinit
 
