@@ -19,6 +19,19 @@ for required_file in \
   fi
 done
 
+bootstrap_config=$(mktemp -d)
+socket_name="dotfiles-ci-$$"
+cleanup() {
+  rm -rf "$bootstrap_config"
+  tmux -L "$socket_name" kill-server >/dev/null 2>&1 || true
+}
+trap cleanup EXIT
+
+# Lazy can rewrite its lockfile while installing plugins on the first launch.
+cp -R "$nvim_config" "$bootstrap_config/nvim"
+echo "Bootstrapping Neovim plugins with a temporary configuration"
+mise exec -- env XDG_CONFIG_HOME="$bootstrap_config" nvim --headless "+luafile $nvim_assert"
+
 echo "Restoring locked Neovim plugins"
 mise exec -- nvim --headless "+Lazy! restore" "+luafile $nvim_assert"
 
@@ -52,12 +65,6 @@ if [ "$plugin_count" -eq 0 ]; then
   echo "No tmux plugins were found in $tmux_config" >&2
   exit 1
 fi
-
-socket_name="dotfiles-ci-$$"
-cleanup() {
-  tmux -L "$socket_name" kill-server >/dev/null 2>&1 || true
-}
-trap cleanup EXIT
 
 echo "Starting tmux with the installed configuration"
 tmux -L "$socket_name" -f "$tmux_config" new-session -d -s smoke
