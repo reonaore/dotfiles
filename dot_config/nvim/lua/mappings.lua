@@ -99,6 +99,12 @@ else
   map("n", "[g", function()
     vim.diagnostic.jump({ count = 1 })
   end, { desc = "Go to previous diagnostic" })
+
+  vim.api.nvim_create_user_command("OpenInGitHub", function()
+    local file = vim.fn.expand("%:.")
+    local line = vim.fn.line(".")
+    vim.fn.system(string.format("gh browse %s:%d", file, line))
+  end, {})
 end
 
 if vim.g.vscode then
