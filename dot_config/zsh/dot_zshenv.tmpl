@@ -5,7 +5,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND='fd --type file --hidden --no-ignore'
-export MANPAGER="bat -plman"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 typeset -U path
 
