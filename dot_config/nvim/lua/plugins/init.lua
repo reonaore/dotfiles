@@ -17,16 +17,25 @@ return {
   { "windwp/nvim-autopairs", event = "InsertEnter" },
   { "folke/which-key.nvim", event = "VeryLazy" },
 
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "html",
+        "css",
+        "bash",
+        "kotlin",
+        "markdown",
+        "lua",
+        "zsh",
+        "python",
+        "javascript",
+        "jsx",
+        "typescript",
+        "tsx",
+      },
+    },
+  },
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
-
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
 }
